@@ -224,3 +224,5 @@ Original model:
 Janssen, M.A. (2012). An Agent-based Model based on Field Experiments. In A. Smaijgl & O. Barreteau (eds.), *Empirical Agent-based Modelling: Challenges and Solutions*. Springer.
 
 CoMSES entry: https://www.comses.net/codebases/3073/releases/1.0.0/
+
+Ostrom, E. (1992). *Crafting Institutions for Self-Governing Irrigation Systems*. ICS Press.
