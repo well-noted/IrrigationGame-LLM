@@ -34,14 +34,16 @@ to setup
     set collected 0
     set income 0
     set xcor -4 + (who * 2)
-    set ycor 0
+    set ycor 1
     set label pos-label
-    set label-color white
+    set label-color black
     set size 2
     set shape "person"
     set color item who [blue green red orange violet]
   ]
 
+  draw-world
+  update-visualization
   setup-python-bridge
   reset-ticks
 end
@@ -142,6 +144,7 @@ to go
   let sc py:runresult "bridge.score_institution(cur_tick, c_list_v, x_list_v, sys_ov_val)"
   if sc >= 0 [ set institution-score sc ]
 
+  update-visualization
   tick
   update-plots
 end
@@ -195,6 +198,45 @@ to-report gini-extraction
   let s 0
   foreach vals [ v1 -> foreach vals [ v2 -> set s s + abs(v1 - v2) ] ]
   report s / (2 * (mean vals) * n ^ 2)
+end
+
+; -----------------------------------------------------------------------
+; Visualization
+; -----------------------------------------------------------------------
+
+; Draw the static world background: farmland zones (tinted per farmer),
+; irrigation canal strip, and earth below.
+to draw-world
+  let farm-colors (list (blue + 3) (green + 3) (red + 3) (orange + 3) (violet + 3))
+  ask patches [
+    ifelse pycor >= 0 [
+      ; Farmland — divide into 5 zones matching farmer x-positions (-4,-2,0,2,4)
+      let zone 0
+      if pxcor > -3 and pxcor <= -1 [ set zone 1 ]
+      if pxcor > -1 and pxcor <= 1  [ set zone 2 ]
+      if pxcor > 1  and pxcor <= 3  [ set zone 3 ]
+      if pxcor > 3                   [ set zone 4 ]
+      set pcolor item zone farm-colors
+    ]
+    [ ifelse pycor = -1 [
+        ; Canal — brightness set dynamically in update-visualization
+        set pcolor blue + 1
+      ]
+      [ ; Earth below the canal
+        set pcolor brown - 1
+      ]
+    ]
+  ]
+end
+
+; Update canal color each tick to reflect current water level (pg 0-100).
+; A dry canal (pg = 0) goes grey; a full canal (pg = 100) is vivid blue.
+to update-visualization
+  ask patches with [pycor = -1] [
+    ifelse pg > 0
+    [ set pcolor scale-color blue pg -30 130 ]
+    [ set pcolor grey - 1 ]
+  ]
 end
 @#$#@#$#@
 GRAPHICS-WINDOW
@@ -347,7 +389,7 @@ CHOOSER
 317
 agent0-backend
 agent0-backend
-"anthropic" "openai" "ollama" "google"
+"anthropic" "openai" "ollama" "ollama-native" "google"
 0
 
 INPUTBOX
@@ -378,7 +420,7 @@ CHOOSER
 385
 agent1-backend
 agent1-backend
-"anthropic" "openai" "ollama" "google"
+"anthropic" "openai" "ollama" "ollama-native" "google"
 0
 
 INPUTBOX
@@ -409,7 +451,7 @@ CHOOSER
 453
 agent2-backend
 agent2-backend
-"anthropic" "openai" "ollama" "google"
+"anthropic" "openai" "ollama" "ollama-native" "google"
 0
 
 INPUTBOX
@@ -440,7 +482,7 @@ CHOOSER
 521
 agent3-backend
 agent3-backend
-"anthropic" "openai" "ollama" "google"
+"anthropic" "openai" "ollama" "ollama-native" "google"
 0
 
 INPUTBOX
@@ -471,7 +513,7 @@ CHOOSER
 589
 agent4-backend
 agent4-backend
-"anthropic" "openai" "ollama" "google"
+"anthropic" "openai" "ollama" "ollama-native" "google"
 0
 
 INPUTBOX
