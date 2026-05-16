@@ -4,7 +4,9 @@ An LLM-augmented extension of Janssen (2012) *An Agent-based Model Based on Fiel
 
 Part of a research program extending classic agent-based commons models with large language model agents — see also [MASTOC-LLM](../MASTOC-LLM/).
 
-<img width="295" height="286" alt="image" src="https://github.com/user-attachments/assets/930c11d4-3873-4d3c-8aba-35a53ad95536" />
+<div align="center">
+  <img width="295" height="286" alt="image" src="https://github.com/user-attachments/assets/930c11d4-3873-4d3c-8aba-35a53ad95536" />
+</div>
 
 
 ---
