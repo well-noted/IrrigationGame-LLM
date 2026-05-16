@@ -47,7 +47,6 @@ to setup
 end
 
 to setup-python-bridge
-  let now-str (word ticks)  ; simple placeholder; NetLogo doesn't have datetime natively
   let d date-and-time       ; "HH:MM:SS MM/DD/YYYY" format
   ; Build run_id from date-and-time
   let date-part substring d 9 19      ; MM/DD/YYYY
