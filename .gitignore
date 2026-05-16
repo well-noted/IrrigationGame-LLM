@@ -1,0 +1,15 @@
+# API keys — never commit these
+.env
+
+# Run logs (large, experiment-specific)
+logs/*/
+
+# Python
+__pycache__/
+*.pyc
+
+# NetLogo auto-backups
+*.nlogo.bak
+
+# macOS
+.DS_Store

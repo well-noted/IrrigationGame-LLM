@@ -1,0 +1,13 @@
+{
+  "log_dir": "logs",
+  "memory_length": 5,
+  "max_tokens": 256,
+  "institution_check_interval": 5,
+  "agents": [
+    {"backend": "anthropic", "model": "claude-sonnet-4-6"},
+    {"backend": "anthropic", "model": "claude-sonnet-4-6"},
+    {"backend": "anthropic", "model": "claude-sonnet-4-6"},
+    {"backend": "anthropic", "model": "claude-sonnet-4-6"},
+    {"backend": "anthropic", "model": "claude-sonnet-4-6"}
+  ]
+}
